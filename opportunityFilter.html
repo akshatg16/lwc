@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_4-of-12 slds-m-right_medium">
+            <lightning-input name="accountName" type="text" label="Account Name" onchange={handleChange} 
+                placeholder="Enter Account Name" value={accountName} required>
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_4-of-12 slds-m-right_medium">
+            <lightning-combobox
+                name="progress"
+                label="Status"
+                value={value}
+                placeholder="Select Status"
+                options={stageOptions}
+                onchange={stageChange} >
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-size_4-of-12 slds-m-right_medium">
+            <lightning-button label="Search" variant="brand" onclick={handleSearch}></lightning-button>
+        </div>
+    </div>
+    <div style="height: 300px;" class="slds-grid">
+        <div class="slds-size_1-of-1">
+
+            <lightning-datatable
+                key-field="id"
+                data={opportunities}
+                columns={columns}>
+            </lightning-datatable>
+        </div>
+    </div>  
+</template>

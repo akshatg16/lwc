@@ -6,6 +6,8 @@ export default class OpportunityFilter extends LightningElement {
     @track opportunities = [];
     @track originalData = [];
     @track accountName;
+    showModal = false;
+    @track data = {};
     stageOptions = [
         {label : 'All', value : 'All'},
         {label : 'Prospecting', value : 'Prospecting'},
@@ -58,5 +60,17 @@ export default class OpportunityFilter extends LightningElement {
         .catch(error=>{
             console.log('error', error);
         })
+    }
+
+    viewRecord(event) {
+        if (this.opportunities.length > 0) {
+            this.data = this.opportunities[event.target.dataset.index];
+            this.showModal = true;
+        }
+        console.log(JSON.stringify(event.target.dataset));
+    }
+
+    handleCancel() {
+        this.showModal = false;
     }
 }

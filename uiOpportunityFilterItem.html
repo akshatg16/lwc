@@ -1,0 +1,17 @@
+<template>
+    <lightning-record-form record-id={oppRecordId} object-api-name="Opportunity" onsuccess={handleSuccessUpdate}
+        fields={oppSelectedFields} mode="view">
+    </lightning-record-form>
+
+    <div class="slds-align_absolute-center">
+        <lightning-button class="slds-var-m-vertical_medium slds-var-p-horizontal_small" variant="destructive-text"
+            name="delete" label="Delete" onclick={handleDelete} value={oppRecordId} icon-name="utility:delete"
+            alternative-text="Delete"></lightning-button>
+    </div>
+    <template if:true={showModal}>
+        <div onclosemodal={handleCloseModal}>
+            <c-ui-opportunity-detail-modal></c-ui-opportunity-detail-modal>
+        </div>
+    </template>
+
+</template>

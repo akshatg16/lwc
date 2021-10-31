@@ -1,0 +1,71 @@
+<template>
+    <lightning-card title="Search Account's Opportunity" icon-name="standard:opportunity">
+        <div class="slds-var-m-horizontal_medium slds-var-m-top_medium slds-var-m-bottom_x-small lgc-bg">
+
+            <lightning-layout>
+
+                <lightning-layout-item padding="horizontal-medium" size="6">
+                    <lightning-input type="text" label="Account Name" name="accountName" id="accName"
+                        placeholder="Enter Account to search..." value={accountName} onchange={handleAccountNameChange} required>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="horizontal-medium" size="2">
+                    <lightning-combobox name="stage" label="Filter Opportunity Stage" value={oppStageValue}
+                        placeholder="Select Opportunity Stage" options={oppStageoptions} id="oppStage"
+                        onchange={handleOppStageChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="horizontal-medium" size="2">
+                    <div class="slds-var-m-horizontal_medium slds-align_absolute-center slds-text-align_left"
+                        style="height:5rem">
+                        <lightning-button label="Search Opportunities" variant="brand" onclick={handleSearch}
+                            icon-name="utility:search">
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+
+            </lightning-layout>
+        </div>
+
+        <template if:true={showNoOfOpportunity}>
+            <div
+                class="slds-var-m-horizontal_medium slds-text-color_success slds-text-heading_medium slds-align_absolute-center">
+                <p>
+                    <lightning-formatted-text value={numberOfOpportunityText}></lightning-formatted-text>
+                </p>
+            </div>
+        </template>
+
+        <template if:true={showError}>
+            <div
+                class="slds-var-m-around_small slds-align_absolute-center slds-text-color_error slds-text-heading_medium">
+                <p>
+                    <lightning-formatted-text value="No Opportunities Found."></lightning-formatted-text>
+                </p>
+            </div>
+        </template>
+
+    </lightning-card>
+
+
+    <template if:true={opportunities}>
+        <div class="slds-grid slds-wrap">
+
+            <template for:each={opportunities} for:item="opp">
+
+                <lightning-card key={opp.Id} title={opp.Name} class="slds-var-p-around_small slds-size_1-of-3"
+                    icon-name="standard:opportunity">
+
+                    <div class="slds-var-m-top_medium slds-var-m-horizontal_medium">
+                        <c-ui-opportunity-filter-item opp-record-id={opp.Id} ondeleteopp={handleDelete}>
+                        </c-ui-opportunity-filter-item>
+                    </div>
+
+                </lightning-card>
+            </template>
+        </div>
+    </template>
+     
+</template>
